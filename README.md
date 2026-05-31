@@ -1,114 +1,333 @@
-function CheckQuestNew()
-    local _Value = game.Players.LocalPlayer.Data.Level.Value
+--// QUEST CHECK
+local function CheckQuestNew()
 
-    if _Value >= 2600 and _Value <= 2624 then
-        MonNew = 'Reef Bandit'
+    local Data = player:FindFirstChild("Data")
+    if not Data then
+        return
+    end
+
+    local Level = Data:FindFirstChild("Level")
+    if not Level then
+        return
+    end
+
+    local I = Level.Value
+
+    --// 2600-2624
+    if I >= 2600 and I <= 2624 then
+
+        MonNew = "Reef Bandit"
+
         LevelQuestNew = 1
-        NameQuestNew = 'SubmergedQuest1'
-        NameMonNew = 'Reef Bandit'
-        CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-        CFrameMonNew = CFrame.new(10736.6191, -2087.8439, 9338.4882)
-    elseif _Value >= 2625 and _Value <= 2649 then
-        MonNew = 'Coral Pirate'
+        NameQuestNew = "SubmergedQuest1"
+
+        CFrameQuestNew = CFrame.new(
+            10778.875,
+            -2087.72437,
+            9265.18359
+        )
+
+        CFrameMonNew = CFrame.new(
+            11019.1318,
+            -2146.06812,
+            9342.3916
+        )
+
+    --// 2625-2649
+    elseif I >= 2625 and I <= 2649 then
+
+        MonNew = "Coral Pirate"
+
         LevelQuestNew = 2
-        NameQuestNew = 'SubmergedQuest1'
-        NameMonNew = 'Coral Pirate'
-        CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-        CFrameMonNew = CFrame.new(10965.1025, -2158.8842, 9177.2597)
-    elseif _Value >= 2650 and _Value <= 2674 then
-        MonNew = 'Sea Chanter'
+        NameQuestNew = "SubmergedQuest1"
+
+        CFrameQuestNew = CFrame.new(
+            10778.875,
+            -2087.72437,
+            9265.18359
+        )
+
+        CFrameMonNew = CFrame.new(
+            10808.6006,
+            -2030.36145,
+            9364.2334
+        )
+
+    --// 2650-2674
+    elseif I >= 2650 and I <= 2674 then
+
+        MonNew = "Sea Chanter"
+
         LevelQuestNew = 1
-        NameQuestNew = 'SubmergedQuest2'
-        NameMonNew = 'Sea Chanter'
-        CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-        CFrameMonNew = CFrame.new(10621.0342, -2087.844, 10102.0332)
-    elseif _Value >= 2675 and _Value <= 2750 then
-        MonNew = 'Ocean Prophet'
+        NameQuestNew = "SubmergedQuest2"
+
+        CFrameQuestNew = CFrame.new(
+            10880.6855,
+            -2086.20044,
+            10032.624
+        )
+
+        CFrameMonNew = CFrame.new(
+            10671.2715,
+            -2057.59155,
+            10047.2588
+        )
+
+    --// 2675-2699
+    elseif I >= 2675 and I <= 2699 then
+
+        MonNew = "Ocean Prophet"
+
         LevelQuestNew = 2
-        NameQuestNew = 'SubmergedQuest2'
-        NameMonNew = 'Ocean Prophet'
-        CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-        CFrameMonNew = CFrame.new(11056.1445, -2001.6717, 10117.4493)
-    else
-        -- For levels above 2750 or below 2600
-        if _Value > 2750 then
-            MonNew = 'Ocean Prophet'
-            LevelQuestNew = 2
-            NameQuestNew = 'SubmergedQuest2'
-            NameMonNew = 'Ocean Prophet'
-            CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-            CFrameMonNew = CFrame.new(11056.1445, -2001.6717, 10117.4493)
-        else
-            MonNew = 'Reef Bandit'
-            LevelQuestNew = 1
-            NameQuestNew = 'SubmergedQuest1'
-            NameMonNew = 'Reef Bandit'
-            CFrameQuestNew = CFrame.new(10882.264, -2086.322, 10034.226)
-            CFrameMonNew = CFrame.new(10736.6191, -2087.8439, 9338.4882)
+        NameQuestNew = "SubmergedQuest2"
+
+        CFrameQuestNew = CFrame.new(
+            10880.6855,
+            -2086.20044,
+            10032.624
+        )
+
+        CFrameMonNew = CFrame.new(
+            11008.5195,
+            -2007.72839,
+            10223.0791
+        )
+
+    --// 2700-2724
+    elseif I >= 2700 and I <= 2724 then
+
+        MonNew = "High Disciple"
+
+        LevelQuestNew = 1
+        NameQuestNew = "SubmergedQuest3"
+
+        CFrameQuestNew = CFrame.new(
+            9640.08789,
+            -1992.44507,
+            9613.65234
+        )
+
+        CFrameMonNew = CFrame.new(
+            9750.41602,
+            -1966.93884,
+            9753.36035
+        )
+
+    --// 2725+
+    elseif I >= 2725 then
+
+        MonNew = "Grand Devotee"
+
+        LevelQuestNew = 2
+        NameQuestNew = "SubmergedQuest3"
+
+        CFrameQuestNew = CFrame.new(
+            9640.08789,
+            -1992.44507,
+            9613.65234
+        )
+
+        CFrameMonNew = CFrame.new(
+            9611.70508,
+            -1993.47119,
+            9882.68848
+        )
+    end
+
+    local hrp = Character():FindFirstChild("HumanoidRootPart")
+
+    if hrp and CFrameQuestNew then
+
+        local Distance =
+            (hrp.Position - CFrameQuestNew.Position).Magnitude
+
+        if Distance > 10000 then
+            TeleportSubmerged()
         end
     end
 end
 
-spawn(function()
-    while task.wait() do
-        if _G.AutoFarmLevelNew then
-            pcall(function()
-                local _Quest = game:GetService('Players').LocalPlayer.PlayerGui.Main.Quest
+--// GET ENEMY MAIS INTELIGENTE
+local function GetEnemy()
 
-                CheckQuestNew()
+    local Enemies = Workspace:FindFirstChild("Enemies")
 
-                if _Quest.Visible ~= false then
-                    local MonFarm = nil
-                    local FoundMon = false
+    if not Enemies then
+        return nil
+    end
 
-                    -- Find the correct monster
-                    for _, v in pairs(game:GetService('Workspace').Enemies:GetChildren()) do
-                        if v.Name == MonNew and v:FindFirstChild('HumanoidRootPart') and v:FindFirstChild('Humanoid') and v.Humanoid.Health > 0 then
-                            MonFarm = v
-                            FoundMon = true
-                            break
-                        end
-                    end
+    local Closest = nil
+    local Distance = math.huge
 
-                    if FoundMon and MonFarm then
-                        if string.find(_Quest.Container.QuestTitle.Title.Text, NameMonNew) then
-                            repeat
-                                task.wait()
-                                EquipWeapon(_G.SelectWeapon)
-                                AutoHaki()
-                                topos(MonFarm.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
+    local hrp = Character():FindFirstChild("HumanoidRootPart")
 
-                                MonFarm.HumanoidRootPart.CanCollide = false
-                                MonFarm.Humanoid.WalkSpeed = 0
-                                MonFarm.Head.CanCollide = false
-                                MonFarm.HumanoidRootPart.Size = Vector3.new(70, 70, 70)
-                                StartBring = true
-                                MonFarmNew = MonFarm.Name
+    if not hrp then
+        return nil
+    end
 
-                                game:GetService('VirtualUser'):CaptureController()
-                                game:GetService('VirtualUser'):Button1Down(Vector2.new(1280, 672))
-                            until not _G.AutoFarmLevelNew or MonFarm.Humanoid.Health <= 0 or not MonFarm.Parent or _Quest.Visible == false
+    for _, v in pairs(Enemies:GetChildren()) do
 
-                            StartBring = false
-                        else
-                            StartBring = false
-                            game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer('AbandonQuest')
-                        end
-                    else
-                        -- No monster found, go to spawn area
-                        TP1(CFrameMonNew)
-                        StartBring = false
-                    end
-                else
-                    StartBring = false
+        if v.Name == MonNew
+        and v:FindFirstChild("Humanoid")
+        and v:FindFirstChild("HumanoidRootPart")
+        and v.Humanoid.Health > 0 then
 
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuestNew.Position).Magnitude <= 20 then
-                        game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer('StartQuest', NameQuestNew, LevelQuestNew)
-                    else
-                        TP1(CFrameQuestNew)
-                    end
-                end
-            end)
+            local mag =
+                (hrp.Position - v.HumanoidRootPart.Position).Magnitude
+
+            if mag < Distance then
+                Distance = mag
+                Closest = v
+            end
         end
+    end
+
+    return Closest
+end
+
+--// EQUIP WEAPON
+local function EquipWeapon()
+
+    pcall(function()
+
+        local char = Character()
+
+        if char:FindFirstChild(_G.SelectWeapon) then
+            return
+        end
+
+        local Tool =
+            player.Backpack:FindFirstChild(_G.SelectWeapon)
+
+        if Tool then
+            char.Humanoid:EquipTool(Tool)
+        end
+    end)
+end
+
+--// AUTO HAKI LOOP
+task.spawn(function()
+    while task.wait(1) do
+        pcall(function()
+
+            if not _G.AutoFarmLevelNew then
+                return
+            end
+
+            local char = Character()
+
+            if not char:FindFirstChild("HasBuso") then
+                ReplicatedStorage.Remotes.CommF_:InvokeServer("Buso")
+            end
+        end)
+    end
+end)
+
+--// MAIN LOOP
+task.spawn(function()
+
+    while task.wait(0.1) do
+
+        pcall(function()
+
+            if not _G.AutoFarmLevelNew then
+                return
+            end
+
+            CheckQuestNew()
+
+            if not MonNew then
+                return
+            end
+
+            local char = Character()
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+
+            if not hrp then
+                return
+            end
+
+            local MainGui =
+                player.PlayerGui:FindFirstChild("Main")
+
+            local QuestGui =
+                MainGui and MainGui:FindFirstChild("Quest")
+
+            local CommF_ =
+                ReplicatedStorage:WaitForChild("Remotes")
+                :WaitForChild("CommF_")
+
+            -- QUEST ATIVA
+            if QuestGui and QuestGui.Visible then
+
+                local Enemy = GetEnemy()
+
+                if Enemy then
+
+                    local EnemyHRP =
+                        Enemy:FindFirstChild("HumanoidRootPart")
+
+                    local EnemyHum =
+                        Enemy:FindFirstChild("Humanoid")
+
+                    if EnemyHRP and EnemyHum then
+
+                        repeat
+                            task.wait()
+
+                            if not _G.AutoFarmLevelNew then
+                                break
+                            end
+
+                            EquipWeapon()
+
+                            EnemyHRP.CanCollide = false
+                            EnemyHRP.Size = Vector3.new(80,80,80)
+
+                            EnemyHum.WalkSpeed = 0
+                            EnemyHum.JumpPower = 0
+
+                            -- FICA PARADO NO AR
+                            hrp.CFrame =
+                                EnemyHRP.CFrame *
+                                CFrame.new(0,_G.FarmHeight,0)
+
+                            hrp.Velocity = Vector3.zero
+
+                            VirtualUser:CaptureController()
+                            VirtualUser:Button1Down(
+                                Vector2.new(500,500)
+                            )
+
+                        until EnemyHum.Health <= 0
+                        or not Enemy.Parent
+                        or not QuestGui.Visible
+
+                    end
+
+                else
+                    TweenTP(CFrameMonNew)
+                end
+
+            else
+
+                local Distance =
+                    (hrp.Position - CFrameQuestNew.Position).Magnitude
+
+                if Distance <= 20 then
+
+                    CommF_:InvokeServer(
+                        "StartQuest",
+                        NameQuestNew,
+                        LevelQuestNew
+                    )
+
+                    task.wait(1)
+
+                else
+                    TweenTP(CFrameQuestNew)
+                end
+            end
+        end)
     end
 end)
